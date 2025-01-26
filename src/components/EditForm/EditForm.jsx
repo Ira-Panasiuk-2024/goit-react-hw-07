@@ -4,11 +4,15 @@ import * as Yup from 'yup';
 import css from './EditForm.module.css';
 
 const EditFormSchema = Yup.object().shape({
-  username: Yup.string()
+  name: Yup.string()
     .min(2, 'Too Short!')
     .max(17, 'Too Long!')
+    .matches(
+      /^[a-zA-Z\s]+$/,
+      'The name must contain only Latin letters and spaces'
+    )
     .required('Required'),
-  phone: Yup.string()
+  number: Yup.string()
     .matches(
       /^\d{3}-\d{3}-\d{4}$/,
       'Phone number must be in the format XXX-XXX-XXXX'
@@ -20,17 +24,14 @@ function EditForm({ contact, onSave, onCancel }) {
   const nameFieldId = useId();
   const phoneFieldId = useId();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (values, { resetForm }) => {
     onSave({ id: contact.id, ...values });
-    actions.resetForm();
+    resetForm();
   };
 
   return (
     <Formik
-      initialValues={{
-        username: contact.name,
-        phone: contact.number,
-      }}
+      initialValues={{ name: contact.name, number: contact.number }}
       onSubmit={handleSubmit}
       validationSchema={EditFormSchema}
     >

@@ -6,11 +6,12 @@ import * as Yup from 'yup';
 import css from './ContactForm.module.css';
 
 const ContactFormSchema = Yup.object().shape({
-  username: Yup.string()
+  name: Yup.string()
     .min(2, 'Too Short!')
     .max(17, 'Too Long!')
+    .matches(/^[a-zA-Z\s]+$/, 'The name must contain only Latin letters')
     .required('Required'),
-  phone: Yup.string()
+  number: Yup.string()
     .matches(
       /^\d{3}-\d{3}-\d{4}$/,
       'Phone number must be in the format XXX-XXX-XXXX'
@@ -18,24 +19,19 @@ const ContactFormSchema = Yup.object().shape({
     .required('Required'),
 });
 
-const initialValues = {
-  username: '',
-  phone: '',
-};
-
 function ContactForm() {
   const dispatch = useDispatch();
   const nameFieldId = useId();
   const phoneFieldId = useId();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (values, { resetForm }) => {
     dispatch(addContactOperation(values));
-    actions.resetForm();
+    resetForm();
   };
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={{ name: '', number: '' }}
       onSubmit={handleSubmit}
       validationSchema={ContactFormSchema}
     >

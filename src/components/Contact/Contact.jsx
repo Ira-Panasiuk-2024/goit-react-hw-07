@@ -19,7 +19,6 @@ function Contact({ id, name, number }) {
   };
 
   const handleSave = updatedContact => {
-    console.log(updatedContact);
     dispatch(editContactOperation(updatedContact));
     dispatch(fetchContacts());
     setIsEditing(false);
