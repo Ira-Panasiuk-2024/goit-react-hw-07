@@ -47,15 +47,11 @@ function ContactForm() {
           <Field
             className={css.field}
             type="text"
-            name="username"
+            name="name"
             id={nameFieldId}
             placeholder="Enter name..."
           />
-          <ErrorMessage
-            name="username"
-            className={css.error}
-            component="span"
-          />
+          <ErrorMessage name="name" className={css.error} component="span" />
         </div>
 
         <div>
@@ -65,11 +61,11 @@ function ContactForm() {
           <Field
             className={css.field}
             type="tel"
-            name="phone"
+            name="number"
             id={phoneFieldId}
             placeholder="Enter phone number (XXX-XXX-XXXX)..."
           />
-          <ErrorMessage name="phone" className={css.error} component="span" />
+          <ErrorMessage name="number" className={css.error} component="span" />
         </div>
 
         <button className={css.btn} type="submit">

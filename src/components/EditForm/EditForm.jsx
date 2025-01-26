@@ -42,14 +42,10 @@ function EditForm({ contact, onSave, onCancel }) {
           <Field
             className={css.field}
             type="text"
-            name="username"
+            name="name"
             id={nameFieldId}
           />
-          <ErrorMessage
-            name="username"
-            className={css.error}
-            component="span"
-          />
+          <ErrorMessage name="name" className={css.error} component="span" />
         </div>
 
         <div>
@@ -59,10 +55,10 @@ function EditForm({ contact, onSave, onCancel }) {
           <Field
             className={css.field}
             type="tel"
-            name="phone"
+            name="number"
             id={phoneFieldId}
           />
-          <ErrorMessage name="phone" className={css.error} component="span" />
+          <ErrorMessage name="number" className={css.error} component="span" />
         </div>
 
         <div className={css.wrap}>
